@@ -2599,9 +2599,197 @@ body, .app-container, .screen { background: #0F172A !important; }
     <meta name="apple-mobile-web-app-title" content="نجوم المستقبل">
     <meta name="mobile-web-app-capable" content="yes">
 </head>
-</head>
 <body>
+<!-- ✅ شاشة تحديث التطبيق مع نسبة مئوية -->
+<div id="updateProgressScreen" style="
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; font-family: 'Segoe UI', Tahoma, sans-serif;
+" dir="rtl">
+    <div style="
+        max-width: 380px; width: 100%; text-align: center;
+        background: rgba(30, 41, 59, 0.95);
+        border: 3px solid #FBBF24;
+        border-radius: 25px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(251,191,36,0.3);
+    ">
+        <div id="updateIcon" style="
+            font-size: 4rem; margin-bottom: 15px;
+            animation: rotateUpdate 2s linear infinite;
+            display: inline-block;
+        ">🔄</div>
+        
+        <div style="
+            font-size: 1.5rem; font-weight: 900;
+            background: linear-gradient(180deg, #FDE68A 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        ">جاري تحديث التطبيق</div>
+        
+        <div id="updateStatusText" style="
+            font-size: 0.95rem; color: #93C5FD;
+            font-weight: 700; margin-bottom: 20px;
+            min-height: 25px;
+        ">⏳ يرجى الانتظار...</div>
+        
+        <div style="
+            background: #1E293B;
+            border-radius: 15px;
+            height: 30px;
+            overflow: hidden;
+            border: 2px solid #334155;
+            position: relative;
+            margin-bottom: 15px;
+        ">
+            <div id="updateProgressBar" style="
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #10B981, #34D399, #6EE7B7);
+                border-radius: 13px;
+                transition: width 0.5s ease;
+                box-shadow: 0 0 20px rgba(16,185,129,0.6);
+                position: relative;
+            ">
+                <div style="
+                    position: absolute; inset: 0;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                    animation: shineProgress 1.5s infinite;
+                "></div>
+            </div>
+            <div id="updateProgressText" style="
+                position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 1rem; font-weight: 900;
+                color: white;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+                z-index: 2;
+            ">0%</div>
+        </div>
+        
+        <div id="updateExtraInfo" style="
+            font-size: 0.8rem; color: #94A3B8;
+            font-weight: 600; min-height: 20px;
+        ">🎁 اكتشف الميزات الجديدة</div>
+    </div>
+</div>
+
+<style>
+@keyframes rotateUpdate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes shineProgress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+@keyframes pulseUpdate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+</style>
+<!-- ✅ شاشة تحديث التطبيق مع نسبة مئوية -->
+<div id="updateProgressScreen" style="
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; font-family: 'Segoe UI', Tahoma, sans-serif;
+" dir="rtl">
+    <div style="
+        max-width: 380px; width: 100%; text-align: center;
+        background: rgba(30, 41, 59, 0.95);
+        border: 3px solid #FBBF24;
+        border-radius: 25px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(251,191,36,0.3);
+    ">
+        <!-- الأيقونة -->
+        <div id="updateIcon" style="
+            font-size: 4rem; margin-bottom: 15px;
+            animation: rotateUpdate 2s linear infinite;
+            display: inline-block;
+        ">🔄</div>
+        
+        <!-- العنوان -->
+        <div style="
+            font-size: 1.5rem; font-weight: 900;
+            background: linear-gradient(180deg, #FDE68A 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        ">جاري تحديث التطبيق</div>
+        
+        <!-- نص الحالة -->
+        <div id="updateStatusText" style="
+            font-size: 0.95rem; color: #93C5FD;
+            font-weight: 700; margin-bottom: 20px;
+            min-height: 25px;
+        ">⏳ يرجى الانتظار...</div>
+        
+        <!-- شريط التقدم -->
+        <div style="
+            background: #1E293B;
+            border-radius: 15px;
+            height: 30px;
+            overflow: hidden;
+            border: 2px solid #334155;
+            position: relative;
+            margin-bottom: 15px;
+        ">
+            <div id="updateProgressBar" style="
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #10B981, #34D399, #6EE7B7);
+                border-radius: 13px;
+                transition: width 0.5s ease;
+                box-shadow: 0 0 20px rgba(16,185,129,0.6);
+                position: relative;
+            ">
+                <div style="
+                    position: absolute; inset: 0;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                    animation: shineProgress 1.5s infinite;
+                "></div>
+            </div>
+            <div id="updateProgressText" style="
+                position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 1rem; font-weight: 900;
+                color: white;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+                z-index: 2;
+            ">0%</div>
+        </div>
+        
+        <!-- معلومات إضافية -->
+        <div id="updateExtraInfo" style="
+            font-size: 0.8rem; color: #94A3B8;
+            font-weight: 600; min-height: 20px;
+        ">🎁 اكتشف الميزات الجديدة</div>
+    </div>
+</div>
+
+<style>
+@keyframes rotateUpdate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes shineProgress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+@keyframes pulseUpdate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+</style>
+
 <div class="app-container">
+
 
     <!-- شاشة الترحيب وتسجيل الاسم -->
     <div id="welcomeScreen" class="screen">
@@ -3697,180 +3885,303 @@ body, .app-container, .screen { background: #0F172A !important; }
     const SPEECH_KEY = 'nujum_speech_enabled';
     const MY_NAMES_KEY = 'nujum_my_names';
     const GAME_COST = 5;
+// ✅ نظام التحديث (بديل يعمل على GitHub Pages)
+const APP_VERSION_KEY = 'nujum_app_version';
+const APP_VERSION = '3.0.1'; // ⚠️ غيّر هذا الرقم عند كل تحديث
+let totalStars = 0, currentLevel = 1, soundEnabled = true, currentCity = 0, speechEnabled = true;
+let CACHED_DEVICE_INFO = null;
+let currentSpeakWord = null;
+let dailyState = { question: null, answered: false, correct: false };
+let purchases = { themes: [], frames: [], sounds: [], activeTheme: 'default', activeFrame: 'none', activeSound: 'none' };
+const SHOP_ITEMS = {
+    themes: [
+        { id: 'night', name: 'ثيم ليلي أسود', icon: '🌙', cost: 15, levelRequired: 1 },
+        { id: 'pink', name: 'ثيم وردي للبنات', icon: '🌸', cost: 10, levelRequired: 1 },
+        { id: 'sky', name: 'ثيم أزرق سماوي', icon: '☁️', cost: 10, levelRequired: 1 },
+        { id: 'nature', name: 'ثيم أخضر طبيعة', icon: '🌿', cost: 10, levelRequired: 1 },
+        { id: 'space', name: 'ثيم فضاء', icon: '🌌', cost: 20, levelRequired: 3 },
+        { id: 'candy', name: 'ثيم حلوى', icon: '🍭', cost: 25, levelRequired: 6 },
+        { id: 'art', name: 'ثيم فني', icon: '🎨', cost: 40, levelRequired: 10 },
+        { id: 'neon', name: 'ثيم نيون', icon: '⚡', cost: 60, levelRequired: 14 }
+    ],
+    frames: [
+        { id: 'stars', name: 'إطار نجوم ذهبي', icon: '✨', cost: 8, levelRequired: 1 },
+        { id: 'rainbow', name: 'إطار قوس قزح', icon: '🌈', cost: 8, levelRequired: 1 },
+        { id: 'fire', name: 'إطار نار', icon: '🔥', cost: 12, levelRequired: 1 },
+        { id: 'wave', name: 'إطار موجة', icon: '🌊', cost: 15, levelRequired: 4 },
+        { id: 'diamond', name: 'إطار ماسي', icon: '💎', cost: 25, levelRequired: 8 },
+        { id: 'royal', name: 'إطار ملكي', icon: '👑', cost: 40, levelRequired: 12 }
+    ],
+    sounds: [
+        { id: 'clap', name: 'صوت تصفيق', icon: '👏', cost: 5, levelRequired: 1 },
+        { id: 'celebration', name: 'صوت احتفال', icon: '🎉', cost: 5, levelRequired: 1 },
+        { id: 'success', name: 'نغمة نجاح', icon: '🎵', cost: 10, levelRequired: 2 },
+        { id: 'drum', name: 'طبلة احتفال', icon: '🥁', cost: 15, levelRequired: 5 },
+        { id: 'trumpet', name: 'بوق الإنجاز', icon: '🎺', cost: 20, levelRequired: 9 }
+    ]
+};
 
-        let totalStars = 0, currentLevel = 1, soundEnabled = true, currentCity = 0, speechEnabled = true;
-    let currentSpeakWord = null;
-    let dailyState = { question: null, answered: false, correct: false };
-    let purchases = { themes: [], frames: [], sounds: [], activeTheme: 'default', activeFrame: 'none', activeSound: 'none' };
 
-        const SHOP_ITEMS = {
-        themes: [
-            { id: 'night', name: 'ثيم ليلي أسود', icon: '🌙', cost: 15, levelRequired: 1 },
-            { id: 'pink', name: 'ثيم وردي للبنات', icon: '🌸', cost: 10, levelRequired: 1 },
-            { id: 'sky', name: 'ثيم أزرق سماوي', icon: '☁️', cost: 10, levelRequired: 1 },
-            { id: 'nature', name: 'ثيم أخضر طبيعة', icon: '🌿', cost: 10, levelRequired: 1 },
-            { id: 'space', name: 'ثيم فضاء', icon: '🌌', cost: 20, levelRequired: 3 },
-            { id: 'candy', name: 'ثيم حلوى', icon: '🍭', cost: 25, levelRequired: 6 },
-            { id: 'art', name: 'ثيم فني', icon: '🎨', cost: 40, levelRequired: 10 },
-            { id: 'neon', name: 'ثيم نيون', icon: '⚡', cost: 60, levelRequired: 14 }
-        ],
-        frames: [
-            { id: 'stars', name: 'إطار نجوم ذهبي', icon: '✨', cost: 8, levelRequired: 1 },
-            { id: 'rainbow', name: 'إطار قوس قزح', icon: '🌈', cost: 8, levelRequired: 1 },
-            { id: 'fire', name: 'إطار نار', icon: '🔥', cost: 12, levelRequired: 1 },
-            { id: 'wave', name: 'إطار موجة', icon: '🌊', cost: 15, levelRequired: 4 },
-            { id: 'diamond', name: 'إطار ماسي', icon: '💎', cost: 25, levelRequired: 8 },
-            { id: 'royal', name: 'إطار ملكي', icon: '👑', cost: 40, levelRequired: 12 }
-        ],
-        sounds: [
-            { id: 'clap', name: 'صوت تصفيق', icon: '👏', cost: 5, levelRequired: 1 },
-            { id: 'celebration', name: 'صوت احتفال', icon: '🎉', cost: 5, levelRequired: 1 },
-            { id: 'success', name: 'نغمة نجاح', icon: '🎵', cost: 10, levelRequired: 2 },
-            { id: 'drum', name: 'طبلة احتفال', icon: '🥁', cost: 15, levelRequired: 5 },
-            { id: 'trumpet', name: 'بوق الإنجاز', icon: '🎺', cost: 20, levelRequired: 9 }
-        ]
-    };
-                  function loadAll() {
-        // ✅ تسجيل زيارة (حتى لو لم يسجل)
-        setTimeout(() => {
-            registerVisit();
-        }, 1500);
+async function fetchBuildDate() {
+    return APP_VERSION; // استخدم رقم الإصدار بدلاً من Last-Modified
+}
+// ============ مستمع فوري للهدايا والإشعارات الإدارية ============
+let giftListener = null;
+
+function startGiftListener() {
+    if (typeof db === 'undefined' || !db) return;
+    if (giftListener) return;
+    
+    let myName = '';
+    try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
+    if (!myName) return;
+    
+    // المؤسس لا يحتاج
+    if (typeof isFounderUser === 'function' && isFounderUser()) return;
+    
+    try {
+        giftListener = db.collection("leaderboard").doc(myName)
+            .onSnapshot(doc => {
+                if (!doc.exists) return;
+                const data = doc.data();
+                const firebaseStars = data.stars || 0;
+                const lastGiftAt = data.lastGiftAt || 0;
+                const lastGiftAmount = data.lastGiftAmount || 0;
+                
+                let lastGiftSeen = 0;
+                try { lastGiftSeen = parseInt(localStorage.getItem('nujum_last_gift_seen') || '0'); } catch(e) {}
+                
+                // 🎁 هدية جديدة!
+                if (lastGiftAt > lastGiftSeen && lastGiftAmount > 0) {
+                    console.log('🎁 وصلت هدية جديدة!');
+                    
+                    totalStars = firebaseStars;
+                    currentLevel = getLevelFromStars(totalStars, myName);
+                    
+                    try {
+                        localStorage.setItem(STARS_KEY, totalStars);
+                        localStorage.setItem(STARS_LEVEL_KEY, currentLevel);
+                        localStorage.setItem('nujum_last_gift_seen', String(lastGiftAt));
+                    } catch(e) {}
+                    
+                    // ✅ الجديد
+refreshAllStarsDisplays();
+                    
+                    setTimeout(() => {
+                        playCelebrationSound();
+                        showAlert(
+                            '🎁 هدية من المؤسس!',
+                            `تم إضافة <b>${lastGiftAmount} ⭐</b> إلى رصيدك!<br><br>` +
+                            `⭐ رصيدك الجديد: <b>${totalStars}</b><br>` +
+                            `🎖️ مستواك: <b>${currentLevel} - ${getLevelTitle(currentLevel)}</b>`,
+                            '🎁'
+                        );
+                    }, 500);
+                } else if (firebaseStars !== totalStars) {
+                    // تحديثات أخرى (إدارية)
+                    totalStars = firebaseStars;
+                    currentLevel = getLevelFromStars(totalStars, myName);
+                    
+                    try {
+                        localStorage.setItem(STARS_KEY, totalStars);
+                        localStorage.setItem(STARS_LEVEL_KEY, currentLevel);
+                    } catch(e) {}
+                    
+                    // ✅ الجديد
+refreshAllStarsDisplays();
+                }
+            }, err => {
+                console.warn('خطأ في مستمع الهدايا:', err.message);
+            });
         
-        // ✅ مزامنة النجوم من Firebase (للتحديثات الإدارية)
-        setTimeout(() => {
-            syncStarsFromFirebase();
-        }, 2000);
-        
-        try {
-            totalStars = parseInt(localStorage.getItem(STARS_KEY)) || 0;
-            currentLevel = parseInt(localStorage.getItem(STARS_LEVEL_KEY)) || 1;
-                        soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
-            speechEnabled = localStorage.getItem(SPEECH_KEY) !== 'false';
-            currentCity = parseInt(localStorage.getItem(CITY_KEY)) || 0;
-            const saved = localStorage.getItem(PURCHASES_KEY);
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                purchases = { ...purchases, ...parsed };
-                purchases.themes = purchases.themes || [];
-                purchases.frames = purchases.frames || [];
-                purchases.sounds = purchases.sounds || [];
-            }
-        } catch (e) {}
-        
-        updateSoundButton(); 
-        updateAllStarsUI(); 
-        updateLevelDisplay();
-        applyTheme(purchases.activeTheme); 
-        applyFrame(purchases.activeFrame);
-        updateDailyBox(); 
-        updateCityMap();
-        loadUserName();
-        loadDayNight();
-               updateAdminButton();
-        loadAdminQuestionsFromFirebase().then(() => {
-            // ✅ بعد التحميل الأولي، ابدأ المستمع الفوري
-            startAdminQuestionsListener();
-        }); 
-                // ✅ تفعيل الحضور اليومي (Streak)
-        updateDailyStreak();
-        
-        // ✅ فحص الشارات عند البداية
-        setTimeout(() => checkAndUnlockBadges(), 2000);
-              // ✅ تحديث شارة المحادثة
-        setTimeout(() => updateChatBadge(), 2500);
-        setInterval(() => updateChatBadge(), 30000); // كل 30 ثانية  
-          // ✅ بدء مستمع الإشعارات
-        setTimeout(() => startNotificationsListener(), 2500);
-        
-        // ✅ تحديث الشارة عند بدء التطبيق
-        setTimeout(() => updateNotifBadge(), 3000);
-      
-        // تحديث اسم الرحلة
-        const routeDisplay = document.getElementById('cityRouteDisplay');
-        if (routeDisplay) {
-            const visitedNames = CITIES.slice(0, currentCity + 1).map(c => c.emoji + ' ' + c.name).join(' → ');
-            routeDisplay.innerHTML = '🗺️ رحلتك: ' + visitedNames + ' <b style="color:#10b981">(أنت في ' + CITIES[currentCity].name + ')</b>';
-        }
-        
-        // ✅ فحص دوري: هل تم حذف حسابي؟ (كل 30 ثانية)
-        setInterval(checkIfMyAccountDeleted, 30000);
-        
-        // ✅ فحص دوري: مزامنة النجوم من Firebase (كل 15 ثانية)
-        setInterval(() => {
-            syncStarsFromFirebase();
-        }, 15000);
+        console.log('✅ بدأ مستمع الهدايا الفوري');
+    } catch(err) {
+        console.warn('تعذّر بدء مستمع الهدايا:', err.message);
     }
+}
+ async function loadAll() {
+    // ✅ فحص التحديث
+    let savedVersion = '';
+    try { savedVersion = localStorage.getItem(APP_VERSION_KEY) || ''; } catch(e) {}
+    
+    if (savedVersion && savedVersion !== APP_VERSION) {
+        console.log(`🆕 تحديث جديد: ${savedVersion} → ${APP_VERSION}`);
+        try { localStorage.setItem(APP_VERSION_KEY, APP_VERSION); } catch(e) {}
+        await runUpdateAnimation();
+        setTimeout(() => window.location.reload(), 1000);
+        return;
+    } else if (!savedVersion) {
+        try { localStorage.setItem(APP_VERSION_KEY, APP_VERSION); } catch(e) {}
+    }
+    
+    // ✅ 1. حمّل معلومات الجهاز بدقة أولاً
+    try {
+        await loadDeviceInfoPrecise();
+    } catch(e) {
+        console.warn('⚠️ تعذّر تحميل معلومات الجهاز:', e);
+    }
+    
+    // ✅ تسجيل زيارة (حتى لو لم يسجل)
+    setTimeout(() => {
+        registerVisit();
+    }, 1500);
+    
+    // ✅ مزامنة النجوم من Firebase
+    setTimeout(() => {
+        syncStarsFromFirebase();
+    }, 2000);
+    
+    try {
+        totalStars = parseInt(localStorage.getItem(STARS_KEY)) || 0;
+        currentLevel = parseInt(localStorage.getItem(STARS_LEVEL_KEY)) || 1;
+        soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
+        speechEnabled = localStorage.getItem(SPEECH_KEY) !== 'false';
+        currentCity = parseInt(localStorage.getItem(CITY_KEY)) || 0;
+        const saved = localStorage.getItem(PURCHASES_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            purchases = { ...purchases, ...parsed };
+            purchases.themes = purchases.themes || [];
+            purchases.frames = purchases.frames || [];
+            purchases.sounds = purchases.sounds || [];
+        }
+    } catch (e) {}
+    
+    updateSoundButton(); 
+    updateAllStarsUI(); 
+    updateLevelDisplay();
+    applyTheme(purchases.activeTheme); 
+    applyFrame(purchases.activeFrame);
+    updateDailyBox(); 
+    updateCityMap();
+    loadUserName();
+    loadDayNight();
+    updateAdminButton();
+    loadAdminQuestionsFromFirebase().then(() => {
+        startAdminQuestionsListener();
+    }); 
+    updateDailyStreak();
+    
+    setTimeout(() => checkAndUnlockBadges(), 2000);
+    setTimeout(() => updateChatBadge(), 2500);
+    setInterval(() => updateChatBadge(), 30000);
+    setTimeout(() => startNotificationsListener(), 2500);
+    setTimeout(() => startGiftListener(), 3000);
+    setTimeout(() => updateNotifBadge(), 3000);
+  
+    const routeDisplay = document.getElementById('cityRouteDisplay');
+    if (routeDisplay) {
+        const visitedNames = CITIES.slice(0, currentCity + 1).map(c => c.emoji + ' ' + c.name).join(' → ');
+        routeDisplay.innerHTML = '🗺️ رحلتك: ' + visitedNames + ' <b style="color:#10b981">(أنت في ' + CITIES[currentCity].name + ')</b>';
+    }
+    
+    setInterval(checkIfMyAccountDeleted, 30000);
+    setInterval(() => {
+    syncStarsFromFirebase();
+}, 5000);  // كل 5 ثواني بدل 15
+    
+    // ✅ فحص دوري للتحديثات
+    setInterval(async () => {
+        let savedV = '';
+        try { savedV = localStorage.getItem(APP_VERSION_KEY) || ''; } catch(e) {}
+        if (savedV && savedV !== APP_VERSION) {
+            console.log(`🔄 تحديث متاح: ${savedV} → ${APP_VERSION}`);
+            try { localStorage.setItem(APP_VERSION_KEY, APP_VERSION); } catch(e) {}
+            await runUpdateAnimation();
+            setTimeout(() => window.location.reload(), 1000);
+        }
+    }, 30000);
+}   
+
     
         // ============ مزامنة النجوم من Firebase إلى localStorage ============
     let lastSyncStars = -1; // ✅ لتجنب التنبيهات المتكررة
     let syncNotificationsEnabled = true; // ✅ لتجنب إزعاج المستخدم
     
     async function syncStarsFromFirebase() {
-        if (typeof db === 'undefined' || !db) return;
+    if (typeof db === 'undefined' || !db) return;
+    
+    // المؤسس لا يحتاج مزامنة
+    if (typeof isFounderUser === 'function' && isFounderUser()) return;
+    
+    let myName = '';
+    try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
+    if (!myName || myName.trim() === '') return;
+    
+    try {
+        const docRef = db.collection("leaderboard").doc(myName);
+        const docSnap = await docRef.get();
         
-        // ⛔ تجاهل المؤسس (نجومه ∞)
-        if (typeof isFounderUser === 'function' && isFounderUser()) return;
-        
-        let myName = '';
-        try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
-        if (!myName || myName.trim() === '') return;
-        
-        try {
-            // ✅ جلب من leaderboard (المصدر الرسمي للنجوم)
-            const docRef = db.collection("leaderboard").doc(myName);
-            const docSnap = await docRef.get();
+        if (docSnap.exists) {
+            const data = docSnap.data();
+            const firebaseStars = data.stars || 0;
+            const lastGiftAt = data.lastGiftAt || 0;
+            const lastGiftAmount = data.lastGiftAmount || 0;
             
-            if (docSnap.exists) {
-                const data = docSnap.data();
-                const firebaseStars = data.stars || 0;
+            let lastGiftSeen = 0;
+            try { lastGiftSeen = parseInt(localStorage.getItem('nujum_last_gift_seen') || '0'); } catch(e) {}
+
+            // 🎁 1. إذا كانت Firebase أكبر من الجهاز (هدية جديدة أو تعديل إداري)
+            if (firebaseStars > totalStars) {
+                console.log(`🎁 استلام زيادة: من ${totalStars} إلى ${firebaseStars}`);
                 
-                // ✅ دائماً حدّث localStorage والواجهة (لضمان التزامن)
-                const oldStars = totalStars;
-                const diff = firebaseStars - oldStars;
-                
-                // ✅ تحديث المتغيرات دائماً
+                const giftDiff = firebaseStars - totalStars;
                 totalStars = firebaseStars;
                 currentLevel = getLevelFromStars(totalStars, myName);
                 
                 try {
                     localStorage.setItem(STARS_KEY, totalStars);
                     localStorage.setItem(STARS_LEVEL_KEY, currentLevel);
+                    if (lastGiftAt > 0) localStorage.setItem('nujum_last_gift_seen', String(lastGiftAt));
                 } catch(e) {}
                 
-                // ✅ تحديث الواجهة دائماً (بدون شرط)
-                updateAllStarsUI();
-                updateLevelDisplay();
-                updateCityMap();
-                
-                // ✅ إذا كانت النجوم مختلفة، اعرض تنبيه
-                if (diff !== 0 && lastSyncStars !== firebaseStars && syncNotificationsEnabled) {
-                    console.log(`🔄 مزامنة النجوم: ${oldStars} → ${firebaseStars}`);
-                    lastSyncStars = firebaseStars;
-                    
-                    if (diff > 0) {
-                        setTimeout(() => {
-                            showAlert(
-                                '🎁 تم تحديث نجومك!',
-                                `تم إضافة <b>${diff} ⭐</b> إلى رصيدك<br><br>` +
-                                `⭐ نجومك الحالية: <b>${firebaseStars}</b><br>` +
-                                `🎖️ مستواك: <b>${currentLevel} - ${getLevelTitle(currentLevel)}</b>`,
-                                '🎉'
-                            );
-                        }, 1000);
-                    } else {
-                        console.log(`⚠️ تم خصم ${Math.abs(diff)} نجمة من رصيدك`);
-                    }
+                // تحديث الواجهة
+                if (typeof refreshAllStarsDisplays === 'function') {
+                    refreshAllStarsDisplays();
                 } else {
-                    // ✅ لا تغيير — فقط سجل
-                    console.log(`✅ النجوم متزامنة: ${firebaseStars}`);
+                    updateAllStarsUI();
+                    updateLevelDisplay();
+                    updateCityMap();
                 }
-            } else {
-                console.warn('⚠️ اللاعب غير موجود في leaderboard:', myName);
+                
+                // إظهار إشعار الهدية
+                if (lastGiftAt > lastGiftSeen || lastGiftSeen === 0) {
+                    setTimeout(() => {
+                        playCelebrationSound();
+                        showAlert(
+                            '🎁 هدية من المؤسس!',
+                            `تم إضافة <b>${giftDiff} ⭐</b> إلى رصيدك!<br><br>` +
+                            `⭐ رصيدك الجديد: <b>${totalStars}</b><br>` +
+                            `🎖️ مستواك: <b>${currentLevel} - ${getLevelTitle(currentLevel)}</b>`,
+                            '🎁'
+                        );
+                    }, 1000);
+                }
+                return;
             }
-        } catch (err) {
-            console.warn('تعذّر مزامنة النجوم:', err.message);
+            
+            // ✅ 2. الأهم: إذا كانت النجوم في الجهاز أكبر (الطفل ربح نجوم من اللعب)
+            if (totalStars > firebaseStars) {
+                console.log(`⬆️ رفع النجوم للـ Firebase: من ${firebaseStars} إلى ${totalStars}`);
+                // نرفع نجوم الجهاز إلى Firebase حتى لا تضيع
+                await docRef.set({
+                    name: myName,
+                    stars: totalStars,
+                    time: Date.now()
+                }, { merge: true });
+                return;
+            }
+            
+            // إذا كانت متساوية، لا نفعل شيئاً
+        } else {
+            // إذا لم يكن موجوداً في leaderboard، نقوم بإنشائه
+            console.warn('⚠️ اللاعب غير موجود، جاري إنشائه...');
+            syncToFirebase();
         }
-    }    
+    } catch (err) {
+        console.warn('تعذّر مزامنة النجوم:', err.message);
+    }
+}
 
         function saveStars() { 
         try { 
@@ -3942,32 +4253,48 @@ body, .app-container, .screen { background: #0F172A !important; }
     }
 
     function addStars(count) {
-        if (count <= 0) return;
-        
-        // المؤسس: لا يجمع نجوم (يبقى ∞)
-        if (isFounderUser()) {
-            updateAllStarsUI();
-            return;
-        }
-        
-        const oldStars = totalStars;
-        totalStars += count;
-        saveStars();
+    if (count <= 0) return;
+    
+    // المؤسس: لا يجمع نجوم (يبقى ∞)
+    if (isFounderUser()) {
         updateAllStarsUI();
-        
-        // نظام المستويات (كل 20 نجمة)
-        const oldLevel = getLevelFromStars(oldStars);
-        const newLevel = getLevelFromStars(totalStars);
-        
-        if (newLevel > oldLevel) {
-            currentLevel = newLevel;
-            saveStars();
-            playCelebrationSound();
-            const levelTitle = getLevelTitle(newLevel);
-            showCelebration('🎉 مبروك! وصلت إلى مستوى جديد!', 'مستوى ' + newLevel + ' - ' + levelTitle);
-        }
-        
-        }
+        return;
+    }
+    
+    const oldStars = totalStars;
+    totalStars += count;
+    saveStars();
+    updateAllStarsUI();
+    
+    // ✅ مزامنة فورية إلى Firebase (لتجنب فقدان النجوم)
+    syncToFirebase();
+    
+    // ✅ أيضاً تحديث في leaderboard مباشرة
+    let myName = '';
+    try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
+    if (myName && myName.trim() !== '' && typeof db !== 'undefined' && db) {
+        db.collection("leaderboard").doc(myName).set({
+            name: myName,
+            stars: totalStars,
+            city: CITIES[currentCity] ? CITIES[currentCity].name : 'اعزاز',
+            time: Date.now()
+        }, { merge: true })
+        .then(() => console.log(`✅ تم رفع ${count} نجمة إلى Firebase (الإجمالي: ${totalStars})`))
+        .catch(err => console.warn('⚠️ خطأ رفع النجوم:', err.message));
+    }
+    
+    // نظام المستويات (كل 20 نجمة)
+    const oldLevel = getLevelFromStars(oldStars);
+    const newLevel = getLevelFromStars(totalStars);
+    
+    if (newLevel > oldLevel) {
+        currentLevel = newLevel;
+        saveStars();
+        playCelebrationSound();
+        const levelTitle = getLevelTitle(newLevel);
+        showCelebration('🎉 مبروك! وصلت إلى مستوى جديد!', 'مستوى ' + newLevel + ' - ' + levelTitle);
+    }
+}
 
     // ============ إدارة الشارات ============
     function getUnlockedBadges() {
@@ -4258,7 +4585,49 @@ body, .app-container, .screen { background: #0F172A !important; }
             }
         });
     }
-
+// ✅ تحديث النجوم في كل الشاشات دفعة واحدة
+function refreshAllStarsDisplays() {
+    // 1. تحديث كل معرّفات النجوم
+    updateAllStarsUI();
+    
+    // 2. تحديث المستوى
+    updateLevelDisplay();
+    
+    // 3. تحديث خريطة المدن
+    updateCityMap();
+    
+    // 4. تحديث لوحة الشرف إذا كانت مفتوحة
+    const lbScreen = document.getElementById('leaderboardScreen');
+    if (lbScreen && lbScreen.classList.contains('active')) {
+        if (typeof showBoard === 'function') showBoard();
+    }
+    
+    // 5. تحديث الملف الشخصي إذا كان مفتوحاً
+    const profScreen = document.getElementById('profileScreen');
+    if (profScreen && profScreen.classList.contains('active')) {
+        if (typeof updateProfileScreen === 'function') updateProfileScreen();
+    }
+    
+    // 6. تحديث المتجر إذا كان مفتوحاً
+    const shopScreen = document.getElementById('shopScreen');
+    if (shopScreen && shopScreen.classList.contains('active')) {
+        if (typeof renderShop === 'function') renderShop();
+    }
+    
+    // 7. تحديث قائمة الألعاب إذا كانت مفتوحة
+    const gamesScreen = document.getElementById('gamesMenuScreen');
+    if (gamesScreen && gamesScreen.classList.contains('active')) {
+        if (typeof renderGamesMenu === 'function') renderGamesMenu();
+    }
+    
+    // 8. تحديث لوحة الشارات إذا كانت مفتوحة
+    const badgesScreen = document.getElementById('badgesLeaderboardScreen');
+    if (badgesScreen && badgesScreen.classList.contains('active')) {
+        if (typeof showBadgesLeaderboard === 'function') showBadgesLeaderboard();
+    }
+    
+    console.log('✅ تم تحديث النجوم في كل الشاشات');
+}
        function updateCityMap() {
         const track = document.getElementById('cityProgressTrack');
         const names = document.getElementById('cityStopNames');
@@ -4459,31 +4828,43 @@ body, .app-container, .screen { background: #0F172A !important; }
 
     
                function showScreen(screenId) {
-        const target = document.getElementById(screenId);
-        if (!target) {
-            console.error('❌ الشاشة غير موجودة:', screenId);
-            return;
+    const target = document.getElementById(screenId);
+    if (!target) {
+        console.error('❌ الشاشة غير موجودة:', screenId);
+        return;
+    }
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    target.classList.add('active');
+    
+    // ✅ إخفاء الفوتر في شاشة الترحيب
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        if (screenId === 'welcomeScreen' || screenId === 'founderLoginScreen') {
+            footer.style.display = 'none';
+        } else {
+            footer.style.display = 'block';
         }
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        target.classList.add('active');
-                // ✅ إخفاء الفوتر في شاشة الترحيب
-        const footer = document.querySelector('.footer');
-        if (footer) {
-            if (screenId === 'welcomeScreen' || screenId === 'founderLoginScreen') {
-                footer.style.display = 'none';
-            } else {
-                footer.style.display = 'block';
-            }
-        }
-        updateAllStarsUI(); 
-        updateCityMap();
-        updateAdminButton();
-        
-        // ✅ إذا كانت شاشة الملف الشخصي، حدّثها
-        if (screenId === 'profileScreen') {
-            updateProfileScreen();
-        }
-    } 
+    }
+    
+    // ✅ تحديث شامل للنجوم عند فتح أي شاشة
+    updateAllStarsUI();
+    updateLevelDisplay();
+    updateCityMap();
+    updateAdminButton();
+    
+    // ✅ إذا كانت شاشة معينة، حدّثها بشكل كامل
+    if (screenId === 'profileScreen') {
+        updateProfileScreen();
+    } else if (screenId === 'shopScreen') {
+        renderShop();
+    } else if (screenId === 'gamesMenuScreen') {
+        renderGamesMenu();
+    } else if (screenId === 'leaderboardScreen') {
+        showBoard();
+    } else if (screenId === 'badgesLeaderboardScreen') {
+        showBadgesLeaderboard();
+    }
+}
 
     let audioCtx = null;
     function initAudio() { if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } } return audioCtx; }
@@ -4549,6 +4930,61 @@ body, .app-container, .screen { background: #0F172A !important; }
         } catch(e){}
     }
     
+    // ============ النطق التلقائي الذكي ============
+function speakAuto(text, lang) {
+    if (!soundEnabled || !speechEnabled) return;
+    if (!text || text.trim() === '') return;
+    
+    try {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            
+            // اختيار اللغة تلقائياً
+            if (lang) {
+                u.lang = lang;
+            } else if (/[\u0600-\u06FF]/.test(text)) {
+                u.lang = 'ar-SA'; // عربي
+            } else if (/[ğüşıöçĞÜŞİÖÇ]/.test(text)) {
+                u.lang = 'tr-TR'; // تركي
+            } else {
+                u.lang = 'en-US'; // إنجليزي
+            }
+            
+            u.rate = 0.9;
+            u.pitch = 1.1;
+            u.volume = 1.0;
+            
+            window.speechSynthesis.speak(u);
+        }
+    } catch(e) {
+        console.warn('خطأ في النطق:', e);
+    }
+}
+
+// ✅ نطق السؤال بناءً على المادة
+function speakQuestion(questionText, subject) {
+    if (!soundEnabled || !speechEnabled) return;
+    if (!questionText) return;
+    
+    // تنظيف السؤال من الرموز
+    const cleaned = questionText.replace(/["""«»]/g, '').trim();
+    
+    // تحديد اللغة حسب المادة
+    let lang = 'ar-SA'; // افتراضياً عربي
+    if (subject === 'english') lang = 'en-US';
+    else if (subject === 'turkish') lang = 'tr-TR';
+    
+    speakAuto(cleaned, lang);
+}
+
+// ✅ نطق الترحيب باسم اللاعب
+function speakWelcome(name) {
+    if (!soundEnabled || !speechEnabled) return;
+    setTimeout(() => {
+        speakAuto('أهلاً وسهلاً يا ' + name + '، هيا نبدأ الرحلة!', 'ar-SA');
+    }, 500);
+}
     function speakWord(word, btn) {
         if (!soundEnabled || !speechEnabled) return;
         try {
@@ -4647,22 +5083,64 @@ body, .app-container, .screen { background: #0F172A !important; }
     }
 
     function renderQuestion() {
-        const q = currentQuestions[currentQuestionIndex];
-        document.getElementById('progressInfo').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
-        document.getElementById('progressFill').style.width = `${((currentQuestionIndex+1) / currentQuestions.length) * 100}%`;
-        const label = document.getElementById('quizSubjectLabel');
-        if (isComprehensive && q.subjectName) label.textContent = q.subjectName;
-        else { const s = subjects.find(x => x.id === currentSubject); label.textContent = s ? s.name : ''; }
-        const img = document.getElementById('questionImage');
-        if (q.img) { img.textContent = q.img; img.classList.remove('hidden'); } else img.classList.add('hidden');
-        const sb = document.getElementById('speakBtn');
-        if (q.speak) { currentSpeakWord = q.speak; sb.classList.remove('hidden'); setTimeout(() => { if (currentSpeakWord === q.speak) speakWord(q.speak, sb); }, 350); }
-        else { currentSpeakWord = null; sb.classList.add('hidden'); }
-        document.getElementById('questionText').textContent = q.question;
-        document.getElementById('answersList').innerHTML = q.answers.map((ans, idx) => `<button class="answer-btn" id="ans-${idx}" onclick="checkAnswer(${idx}, event)"><span class="answer-letter">${String.fromCharCode(65+idx)}</span>${ans}</button>`).join('');
-        document.getElementById('nextBtn').disabled = true; answered = false;
-        document.getElementById('nextBtn').textContent = currentQuestionIndex === currentQuestions.length - 1 ? 'عرض النتيجة 🎉' : 'السؤال التالي ←';
+    const q = currentQuestions[currentQuestionIndex];
+    
+    // شريط التقدم
+    document.getElementById('progressInfo').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+    document.getElementById('progressFill').style.width = `${((currentQuestionIndex+1) / currentQuestions.length) * 100}%`;
+    
+    // اسم المادة
+    const label = document.getElementById('quizSubjectLabel');
+    if (isComprehensive && q.subjectName) {
+        label.textContent = q.subjectName;
+    } else {
+        const s = subjects.find(x => x.id === currentSubject);
+        label.textContent = s ? s.name : '';
     }
+    
+    // صورة السؤال
+    const img = document.getElementById('questionImage');
+    if (q.img) {
+        img.textContent = q.img;
+        img.classList.remove('hidden');
+    } else {
+        img.classList.add('hidden');
+    }
+    
+    // زر النطق
+    const sb = document.getElementById('speakBtn');
+    if (q.speak) {
+        currentSpeakWord = q.speak;
+        sb.classList.remove('hidden');
+    } else {
+        currentSpeakWord = null;
+        sb.classList.add('hidden');
+    }
+    
+    // نص السؤال
+    document.getElementById('questionText').textContent = q.question;
+    
+    // الإجابات
+    document.getElementById('answersList').innerHTML = q.answers.map((ans, idx) => 
+        `<button class="answer-btn" id="ans-${idx}" onclick="checkAnswer(${idx}, event)"><span class="answer-letter">${String.fromCharCode(65+idx)}</span>${ans}</button>`
+    ).join('');
+    
+    // ✅ النطق التلقائي للسؤال
+    setTimeout(() => {
+        speakQuestion(q.question, isComprehensive ? q.subject : currentSubject);
+        if (q.speak) {
+            setTimeout(() => speakWord(q.speak, sb), 1500);
+        }
+    }, 500);
+    
+    // زر السؤال التالي
+    document.getElementById('nextBtn').disabled = true;
+    answered = false;
+    document.getElementById('nextBtn').textContent = 
+        currentQuestionIndex === currentQuestions.length - 1 
+            ? 'عرض النتيجة 🎉' 
+            : 'السؤال التالي ←';
+}
 
     function checkAnswer(sel, event) {
         if (answered) return; answered = true;
@@ -4789,7 +5267,7 @@ body, .app-container, .screen { background: #0F172A !important; }
         // ✅ مزامنة فورية قبل فحص النجوم
         await syncStarsFromFirebase();
         
-        const GAMES_DATA = getGamesData();
+        
         const game = GAMES_DATA[gameKey];
         if (!game) return;
         
@@ -6168,12 +6646,14 @@ body, .app-container, .screen { background: #0F172A !important; }
     }
     
     function confirmOk() {
-        const cb = confirmCallback;
-        closeConfirm();
-        if (typeof cb === 'function') {
-            setTimeout(() => cb(), 200);
-        }
+    const cb = confirmCallback;
+    confirmCancelCallback = null; // ← امسح onCancel قبل الإغلاق
+    document.getElementById('confirmOverlay').classList.remove('show');
+    confirmCallback = null;
+    if (typeof cb === 'function') {
+        setTimeout(() => cb(), 200);
     }
+}
 
     // ============ قسم الإعدادات ============
     function showSettings() {
@@ -6438,264 +6918,451 @@ body, .app-container, .screen { background: #0F172A !important; }
         });
     }
     
-    // ============ تتبع معلومات الجهاز (متقدم) ============
-    function getDeviceInfo() {
-        const ua = navigator.userAgent;
-        let device = 'غير معروف';
-        let deviceModel = 'غير معروف';
-        let os = 'غير معروف';
-        let browser = 'غير معروف';
-        let brand = 'غير معروف';
-        
-        // ============ كشف نظام التشغيل واسم الجهاز ============
-        
-        // Android
+// ============ تحميل معلومات الجهاز بدقة (يُستدعى مرة واحدة عند البدء) ============
+async function loadDeviceInfoPrecise() {
+    const ua = navigator.userAgent;
+    const isMobileDevice = /android|iphone|ipad|ipod|mobile/i.test(ua);
+    
+    let deviceModel = 'غير معروف';
+    let os = 'غير معروف';
+    let brand = 'غير معروف';
+    
+    // ✅ 1. محاولة استخدام Client Hints (الأدق)
+    try {
+        if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+            const hints = await navigator.userAgentData.getHighEntropyValues([
+                'model', 'platform', 'platformVersion', 'architecture'
+            ]);
+            
+            console.log('🔍 Client Hints:', hints);
+            
+            if (hints.model && hints.model.trim() !== '') {
+                deviceModel = hints.model.trim();
+            }
+            if (hints.platform) {
+                os = hints.platform;
+                if (hints.platformVersion) {
+                    os += ' ' + hints.platformVersion.split('.')[0];
+                }
+            }
+        }
+    } catch (err) {
+        console.warn('⚠️ Client Hints غير متاح:', err.message);
+    }
+    
+    // ✅ 2. إذا لم يعمل Client Hints → استخدم userAgent
+    if (deviceModel === 'غير معروف') {
         if (/android/i.test(ua)) {
-            brand = 'Android';
             const androidMatch = ua.match(/Android\s([0-9\.]+)/);
             os = 'Android';
             if (androidMatch) os += ' ' + androidMatch[1];
             
-            // محاولة استخراج اسم الجهاز (الموديل)
-            const modelPatterns = [
+            const patterns = [
                 /;\s*([^;)]+)\s+Build\//i,
-                /Android[^;]*;\s*([^;)]+)\)/i,
-                /;\s*([^;)]+)\s*\)/i
+                /Android[^;]*;\s*([^;)]+)\)/i
             ];
-            
-            for (const pattern of modelPatterns) {
+            for (const pattern of patterns) {
                 const match = ua.match(pattern);
-                if (match && match[1] && match[1].length < 40) {
-                    deviceModel = match[1].trim();
-                    // تنظيف الاسم
-                    deviceModel = deviceModel.replace(/\s*Build.*$/i, '').trim();
-                    break;
+                if (match && match[1]) {
+                    let m = match[1].trim().replace(/\s*Build.*$/i, '').trim();
+                    if (m && m.length > 1 && m.length < 40) {
+                        deviceModel = m;
+                        break;
+                    }
                 }
             }
-            
-            // كشف العلامة التجارية من الاسم
-            const uaLower = deviceModel.toLowerCase();
-            if (uaLower.includes('redmi') || uaLower.includes('xiaomi') || uaLower.includes('mi ') || uaLower.includes('poco')) {
-                brand = 'Xiaomi';
-                device = '📱 ' + (deviceModel.includes('Redmi') ? deviceModel : 'Xiaomi ' + deviceModel);
-            } else if (uaLower.includes('samsung') || uaLower.includes('sm-')) {
-                brand = 'Samsung';
-                device = '📱 ' + (deviceModel.includes('Samsung') ? deviceModel : 'Samsung ' + deviceModel);
-            } else if (uaLower.includes('huawei')) {
-                brand = 'Huawei';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('oppo')) {
-                brand = 'Oppo';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('vivo')) {
-                brand = 'Vivo';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('oneplus') || uaLower.includes('one plus')) {
-                brand = 'OnePlus';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('realme')) {
-                brand = 'Realme';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('infinix')) {
-                brand = 'Infinix';
-                device = '📱 ' + deviceModel;
-            } else if (uaLower.includes('tecno')) {
-                brand = 'Tecno';
-                device = '📱 ' + deviceModel;
-            } else if (deviceModel && deviceModel !== 'غير معروف') {
-                device = '📱 ' + deviceModel;
-            } else {
-                device = '📱 هاتف أندرويد';
-            }
-        }
-        
-        // iPhone / iPad
-        else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-            brand = 'Apple';
+        } else if (/iPhone/.test(ua)) {
             const iosMatch = ua.match(/OS\s([0-9_]+)/);
             os = 'iOS';
             if (iosMatch) os += ' ' + iosMatch[1].replace(/_/g, '.');
             
-            if (/iPad/.test(ua)) {
-                device = '📱 iPad';
-                deviceModel = 'iPad';
-            } else if (/iPhone/.test(ua)) {
-                device = '📱 iPhone';
-                // محاولة تحديد الموديل
-                if (window.screen && window.screen.height) {
-                    const h = Math.max(window.screen.height, window.screen.width);
-                    const models = {
-                        667: 'iPhone 6/7/8',
-                        736: 'iPhone 6/7/8 Plus',
-                        812: 'iPhone X/XS/11 Pro',
-                        896: 'iPhone XR/XS Max/11',
-                        844: 'iPhone 12/12 Pro/13/14',
-                        926: 'iPhone 12 Pro Max/13 Pro Max/14 Plus',
-                        852: 'iPhone 14 Pro/15/15 Pro',
-                        932: 'iPhone 14 Pro Max/15 Plus/15 Pro Max'
-                    };
-                    for (const key of Object.keys(models)) {
-                        if (Math.abs(h - parseInt(key)) < 5) {
-                            deviceModel = models[key];
-                            break;
-                        }
-                    }
-                }
-                if (deviceModel === 'غير معروف') deviceModel = 'iPhone';
-                device = '📱 ' + deviceModel;
-            } else {
-                device = '📱 iPod';
-                deviceModel = 'iPod';
+            if (window.screen) {
+                const h = Math.max(window.screen.height, window.screen.width);
+                const w = Math.min(window.screen.height, window.screen.width);
+                const key = w + 'x' + h;
+                const iPhoneModels = {
+                    '375x667': 'iPhone 8 / SE',
+                    '414x736': 'iPhone 8 Plus',
+                    '375x812': 'iPhone X / XS / 11 Pro',
+                    '414x896': 'iPhone XR / 11',
+                    '390x844': 'iPhone 12 / 13 / 14',
+                    '428x926': 'iPhone 12 Pro Max / 14 Plus',
+                    '393x852': 'iPhone 14 Pro / 15',
+                    '430x932': 'iPhone 14 Pro Max / 15 Pro Max'
+                };
+                deviceModel = iPhoneModels[key] || 'iPhone';
             }
-        }
-        
-        // Windows
-        else if (/windows/i.test(ua)) {
-            brand = 'Windows';
+        } else if (/iPad/.test(ua)) {
+            os = 'iPadOS';
+            deviceModel = 'iPad';
+        } else if (/windows/i.test(ua)) {
             os = 'Windows';
-            if (/Windows NT 10/.test(ua)) os += ' 10/11';
-            else if (/Windows NT 6\.3/.test(ua)) os += ' 8.1';
-            else if (/Windows NT 6\.2/.test(ua)) os += ' 8';
-            else if (/Windows NT 6\.1/.test(ua)) os += ' 7';
-            device = '💻 كمبيوتر ويندوز';
-            deviceModel = 'PC';
-        }
-        
-        // macOS
-        else if (/macintosh|mac os x/i.test(ua)) {
-            brand = 'Apple';
-            const macMatch = ua.match(/Mac OS X\s([0-9_]+)/);
+            deviceModel = 'كمبيوتر ويندوز';
+        } else if (/macintosh/i.test(ua)) {
             os = 'macOS';
-            if (macMatch) os += ' ' + macMatch[1].replace(/_/g, '.');
-            device = '🍏 ماك بوك / iMac';
             deviceModel = 'Mac';
-        }
-        
-        // Linux
-        else if (/linux/i.test(ua)) {
-            brand = 'Linux';
+        } else if (/linux/i.test(ua)) {
             os = 'Linux';
-            device = '🐧 كمبيوتر لينكس';
-            deviceModel = 'Linux PC';
+            deviceModel = 'كمبيوتر لينكس';
         }
-        
-        // ============ كشف المتصفح ============
-        if (/edg/i.test(ua)) browser = '🌐 Microsoft Edge';
-        else if (/samsungbrowser/i.test(ua)) browser = '🌐 Samsung Internet';
-        else if (/ucbrowser/i.test(ua)) browser = '🌐 UC Browser';
-        else if (/opr|opera/i.test(ua)) browser = '🌐 Opera';
-        else if (/chrome|crios/i.test(ua)) browser = '🌐 Google Chrome';
-        else if (/firefox|fxios/i.test(ua)) browser = '🌐 Firefox';
-        else if (/safari/i.test(ua)) browser = '🌐 Safari';
-        
-        // حجم الشاشة
-        const screenSize = window.screen.width + 'x' + window.screen.height;
-        
-        // اللغة
-        const lang = navigator.language || navigator.userLanguage || 'غير معروف';
-        
-        // نوع الجهاز
-        const isMobile = /android|iphone|ipad|ipod|mobile/i.test(ua);
-        const deviceType = isMobile ? '📱 هاتف' : '💻 كمبيوتر';
-        
-        return {
-            device: device,              // الاسم الكامل: "📱 Redmi Note 12"
-            deviceModel: deviceModel,    // الموديل فقط: "Redmi Note 12"
-            brand: brand,                // الماركة: "Xiaomi"
-            deviceType: deviceType,      // النوع: هاتف / كمبيوتر
-            os: os,                      // النظام: "Android 13"
-            browser: browser,            // المتصفح
-            screenSize: screenSize,
-            lang: lang,
-            userAgent: ua
-        };
     }
     
-      // ============ تسجيل زيارة (للزوار بدون تسجيل) ============
-    async function registerVisit() {
-        if (typeof db === 'undefined' || !db) return;
-        
-        try {
-            const deviceInfo = getDeviceInfo();
-            
-            // إنشاء أو استرجاع معرف الزائر
-            let visitorId = '';
-            try {
-                visitorId = localStorage.getItem('nujum_visitor_id') || '';
-            } catch(e) {}
-            
-            if (!visitorId) {
-                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                try { localStorage.setItem('nujum_visitor_id', visitorId); } catch(e) {}
-            }
-            
-            // تسجيل الزيارة
-            const visitData = {
-                visitorId: visitorId,
-                device: deviceInfo.device,
-                deviceModel: deviceInfo.deviceModel,
-                brand: deviceInfo.brand,
-                deviceType: deviceInfo.deviceType,
-                os: deviceInfo.os,
-                browser: deviceInfo.browser,
-                screenSize: deviceInfo.screenSize,
-                lang: deviceInfo.lang,
-                firstVisit: Date.now(),
-                lastVisit: Date.now(),
-                visitsCount: 1
-            };
-            
-            // فحص إذا الزائر موجود
-            const docRef = db.collection("visitors").doc(visitorId);
-            const docSnap = await docRef.get();
-            
-            if (docSnap.exists) {
-                const existing = docSnap.data();
-                await docRef.update({
-                    lastVisit: Date.now(),
-                    visitsCount: (existing.visitsCount || 1) + 1
-                });
-                console.log('👁️ زيارة متكررة:', visitorId);
-            } else {
-                await docRef.set(visitData);
-                console.log('🆕 زائر جديد:', deviceInfo.device);
-            }
-        } catch(err) {
-            console.warn('خطأ في تسجيل الزيارة:', err);
-        }
+    // ✅ 3. تحديد الماركة
+    const m = deviceModel.toLowerCase();
+    if (m.includes('redmi') || m.includes('xiaomi') || m.includes('poco')) {
+        brand = 'Xiaomi';
+    } else if (m.includes('sm-') || m.includes('samsung') || m.includes('galaxy')) {
+        brand = 'Samsung';
+    } else if (m.includes('huawei') || m.includes('honor')) {
+        brand = 'Huawei';
+    } else if (m.includes('oppo')) {
+        brand = 'Oppo';
+    } else if (m.includes('vivo')) {
+        brand = 'Vivo';
+    } else if (m.includes('oneplus')) {
+        brand = 'OnePlus';
+    } else if (m.includes('realme')) {
+        brand = 'Realme';
+    } else if (m.includes('infinix')) {
+        brand = 'Infinix';
+    } else if (m.includes('tecno')) {
+        brand = 'Tecno';
+    } else if (m.includes('pixel')) {
+        brand = 'Google Pixel';
+    } else if (m.includes('iphone') || m.includes('ipad') || m.includes('mac')) {
+        brand = 'Apple';
+    } else if (m.includes('ويندوز')) {
+        brand = 'Windows';
     }
+    
+    // ✅ 4. تحديد المتصفح
+    let browser = 'غير معروف';
+    if (/edg/i.test(ua)) browser = 'Microsoft Edge';
+    else if (/samsungbrowser/i.test(ua)) browser = 'Samsung Internet';
+    else if (/ucbrowser/i.test(ua)) browser = 'UC Browser';
+    else if (/opr|opera/i.test(ua)) browser = 'Opera';
+    else if (/chrome|crios/i.test(ua)) browser = 'Google Chrome';
+    else if (/firefox|fxios/i.test(ua)) browser = 'Firefox';
+    else if (/safari/i.test(ua)) browser = 'Safari';
+    else if (/wv/i.test(ua)) browser = 'WebView';
+    
+    // ✅ 5. بناء اسم الجهاز النهائي
+    const deviceType = isMobileDevice ? '📱' : '💻';
+    let deviceLabel = '';
+    
+    if (deviceModel !== 'غير معروف' && deviceModel !== '') {
+        if (brand !== 'غير معروف' && !deviceModel.toLowerCase().includes(brand.toLowerCase())) {
+            deviceLabel = deviceType + ' ' + brand + ' ' + deviceModel;
+        } else {
+            deviceLabel = deviceType + ' ' + deviceModel;
+        }
+    } else {
+        deviceLabel = isMobileDevice ? '📱 هاتف ذكي' : '💻 كمبيوتر';
+    }
+    
+    CACHED_DEVICE_INFO = {
+        device: deviceLabel,
+        deviceModel: deviceModel,
+        brand: brand,
+        deviceType: isMobileDevice ? '📱 هاتف' : '💻 كمبيوتر',
+        os: os,
+        browser: browser,
+        screenSize: window.screen.width + 'x' + window.screen.height,
+        lang: navigator.language || 'ar',
+        userAgent: ua
+    };
+    
+    console.log('📱 تم حفظ معلومات الجهاز:', CACHED_DEVICE_INFO);
+    return CACHED_DEVICE_INFO;
+}
+
+// ============ إرجاع معلومات الجهاز (متزامنة - سريعة) ============
+function getDeviceInfo() {
+    if (!CACHED_DEVICE_INFO) {
+        // قيم افتراضية في حال لم يتم التحميل بعد
+        return {
+            device: '📱 جاري الكشف...',
+            deviceModel: 'غير معروف',
+            brand: 'غير معروف',
+            deviceType: '📱 هاتف',
+            os: 'غير معروف',
+            browser: 'غير معروف',
+            screenSize: window.screen.width + 'x' + window.screen.height,
+            lang: navigator.language || 'ar',
+            userAgent: navigator.userAgent
+        };
+    }
+    return CACHED_DEVICE_INFO;
+}
 
 
-    // ============ تسجيل اللاعب في قاعدة البيانات ============
-    async function registerPlayer(name) {
+// ============ تسجيل زيارة (للزوار بدون تسجيل) ============
+async function registerVisit() {
+    if (typeof db === 'undefined' || !db) return;
+    
+    try {
+        const deviceInfo = getDeviceInfo();
         
+        // إنشاء أو استرجاع معرف الزائر
+        let visitorId = '';
         try {
-            const deviceInfo = getDeviceInfo();
-            const playerData = {
+            visitorId = localStorage.getItem('nujum_visitor_id') || '';
+        } catch(e) {}
+        
+        if (!visitorId) {
+            visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            try { localStorage.setItem('nujum_visitor_id', visitorId); } catch(e) {}
+        }
+        
+        // بيانات الزيارة
+        const visitData = {
+            visitorId: visitorId,
+            device: deviceInfo.device,
+            deviceModel: deviceInfo.deviceModel,
+            brand: deviceInfo.brand,
+            deviceType: deviceInfo.deviceType,
+            os: deviceInfo.os,
+            browser: deviceInfo.browser,
+            screenSize: deviceInfo.screenSize,
+            lang: deviceInfo.lang,
+            firstVisit: Date.now(),
+            lastVisit: Date.now(),
+            visitsCount: 1
+        };
+        
+        // فحص إذا الزائر موجود
+        const docRef = db.collection("visitors").doc(visitorId);
+        const docSnap = await docRef.get();
+         
+        if (docSnap.exists) {
+            const existing = docSnap.data();
+            await docRef.update({
+                lastVisit: Date.now(),
+                visitsCount: (existing.visitsCount || 1) + 1
+            });
+            console.log('👁️ زيارة متكررة:', deviceInfo.device);
+        } else {
+            await docRef.set(visitData);
+            console.log('🆕 زائر جديد:', deviceInfo.device);
+        }
+    } catch(err) {
+        console.warn('خطأ في تسجيل الزيارة:', err);
+    }
+}
+// ============ تسجيل اللاعب في قاعدة البيانات (نسخة مضمونة) ============
+async function registerPlayer(name) {
+    console.log('📝 registerPlayer بدأت:', name);
+    
+    if (typeof db === 'undefined' || !db) {
+        console.error('❌ Firebase غير متصل');
+        return;
+    }
+    
+    if (!name || name.trim() === '') {
+        console.error('❌ اسم فارغ');
+        return;
+    }
+    
+    try {
+        // ✅ احصل على معلومات الجهاز
+        const deviceInfo = getDeviceInfo();
+        console.log('📱 معلومات الجهاز:', deviceInfo);
+        
+        // ✅ بيانات اللاعب
+        const playerData = {
+            name: name,
+            device: deviceInfo.device || 'غير معروف',
+            deviceModel: deviceInfo.deviceModel || 'غير معروف',
+            brand: deviceInfo.brand || 'غير معروف',
+            deviceType: deviceInfo.deviceType || 'غير معروف',
+            os: deviceInfo.os || 'غير معروف',
+            browser: deviceInfo.browser || 'غير معروف',
+            screenSize: deviceInfo.screenSize || 'غير معروف',
+            lang: deviceInfo.lang || 'ar',
+            userAgent: deviceInfo.userAgent || '',
+            registeredAt: Date.now(),
+            lastSeen: Date.now(),
+            stars: totalStars || 0,
+            city: (CITIES[currentCity] ? CITIES[currentCity].name : 'اعزاز')
+        };
+        
+        console.log('📦 بيانات اللاعب:', playerData);
+        
+        // ✅ 1. احفظ في players
+        await db.collection("players").doc(name).set(playerData, { merge: true });
+        console.log('✅ تم الحفظ في players');
+        
+        // ✅ 2. احفظ في leaderboard (فقط إذا لم يكن المؤسس)
+        if (name !== "عمر عثمان حميدو") {
+            await db.collection("leaderboard").doc(name).set({
                 name: name,
-                device: deviceInfo.device,
-                deviceModel: deviceInfo.deviceModel,
-                brand: deviceInfo.brand,
-                deviceType: deviceInfo.deviceType,
-                os: deviceInfo.os,
-                browser: deviceInfo.browser,
-                screenSize: deviceInfo.screenSize,
-                lang: deviceInfo.lang,
-                userAgent: deviceInfo.userAgent,
-                registeredAt: Date.now(),
-                lastSeen: Date.now(),
                 stars: totalStars || 0,
-                city: (CITIES[currentCity] ? CITIES[currentCity].name : 'اعزاز')
-            };
-            
-            // حفظ في مجموعة players منفصلة
-            await db.collection("players").doc(name).set(playerData, { merge: true });
-            console.log('✅ تم تسجيل اللاعب:', name, '| الجهاز:', deviceInfo.device);
-        } catch(err) {
-            console.warn('خطأ في تسجيل اللاعب:', err);
+                city: playerData.city,
+                time: Date.now()
+            }, { merge: true });
+            console.log('✅ تم الحفظ في leaderboard');
         }
-        }
+        
+        return true;
+        
+    } catch(err) {
+        console.error('❌ خطأ في registerPlayer:', err);
+        console.error('   code:', err.code);
+        console.error('   message:', err.message);
+        throw err;
+    }
+}
 
+// ============ شاشة تحديث التطبيق مع نسبة مئوية ============
+function showUpdateProgress() {
+    const screen = document.getElementById('updateProgressScreen');
+    if (screen) screen.style.display = 'flex';
+}
+
+function hideUpdateProgress() {
+    const screen = document.getElementById('updateProgressScreen');
+    if (screen) {
+        screen.style.opacity = '0';
+        screen.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => { screen.style.display = 'none'; }, 500);
+    }
+}
+
+function setUpdateProgress(percent, statusText, extraInfo) {
+    const bar = document.getElementById('updateProgressBar');
+    const text = document.getElementById('updateProgressText');
+    const status = document.getElementById('updateStatusText');
+    const extra = document.getElementById('updateExtraInfo');
+    const icon = document.getElementById('updateIcon');
+    
+    // clamp بين 0 و 100
+    const p = Math.max(0, Math.min(100, Math.round(percent)));
+    
+    if (bar) bar.style.width = p + '%';
+    if (text) text.textContent = p + '%';
+    if (status && statusText) status.textContent = statusText;
+    if (extra && extraInfo) extra.textContent = extraInfo;
+    
+    // عند الوصول 100% → غيّر الأيقونة
+    if (p >= 100 && icon) {
+        icon.textContent = '✅';
+        icon.style.animation = 'pulseUpdate 1s infinite';
+    }
+}
+
+// ✅ تشغيل شاشة التحديث بنسبة متحركة
+async function runUpdateAnimation() {
+    showUpdateProgress();
+    
+    const steps = [
+        { percent: 10, status: '🔍 فحص التحديثات...', info: 'جاري الاتصال بالسيرفر' },
+        { percent: 25, status: '📥 تحميل المحتوى الجديد...', info: '✨ ميزات جديدة قادمة' },
+        { percent: 45, status: '📚 تحديث الأسئلة...', info: '🎯 أسئلة جديدة' },
+        { percent: 65, status: '🎮 تحديث الألعاب...', info: '🚀 تحسينات' },
+        { percent: 80, status: '🎨 تحديث التصميم...', info: '💎 تصميم أجمل' },
+        { percent: 95, status: '🎁 تجهيز الهدايا...', info: '🎉 على وشك الانتهاء' },
+        { percent: 100, status: '✅ تم التحديث بنجاح!', info: '🎊 استمتع بالتطبيق الجديد' }
+    ];
+    
+    for (let i = 0; i < steps.length; i++) {
+        const step = steps[i];
+        setUpdateProgress(step.percent, step.status, step.info);
+        
+        // تشغيل صوت خفيف
+        playBeep(600 + i * 100, 0.08, 0.1);
+        
+        // انتظر قبل الخطوة التالية
+        await new Promise(resolve => setTimeout(resolve, 700));
+    }
+    
+    // انتظر لحظة أخيرة
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    // نطق رسالة النهاية
+    if (soundEnabled && speechEnabled) {
+        speakAuto('تم تحديث التطبيق بنجاح! استمتع بالميزات الجديدة', 'ar-SA');
+    }
+    
+    // انتظر بعد النطق
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // أخفِ الشاشة
+    hideUpdateProgress();
+}
+// ============ شاشة تحديث التطبيق مع نسبة مئوية ============
+function showUpdateProgress() {
+    const screen = document.getElementById('updateProgressScreen');
+    if (screen) {
+        screen.style.display = 'flex';
+        screen.style.opacity = '1';
+    }
+}
+
+function hideUpdateProgress() {
+    const screen = document.getElementById('updateProgressScreen');
+    if (screen) {
+        screen.style.opacity = '0';
+        screen.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => { screen.style.display = 'none'; }, 500);
+    }
+}
+
+function setUpdateProgress(percent, statusText, extraInfo) {
+    const bar = document.getElementById('updateProgressBar');
+    const text = document.getElementById('updateProgressText');
+    const status = document.getElementById('updateStatusText');
+    const extra = document.getElementById('updateExtraInfo');
+    const icon = document.getElementById('updateIcon');
+    
+    const p = Math.max(0, Math.min(100, Math.round(percent)));
+    
+    if (bar) bar.style.width = p + '%';
+    if (text) text.textContent = p + '%';
+    if (status && statusText) status.textContent = statusText;
+    if (extra && extraInfo) extra.textContent = extraInfo;
+    
+    if (p >= 100 && icon) {
+        icon.textContent = '✅';
+        icon.style.animation = 'pulseUpdate 1s infinite';
+    }
+}
+
+async function runUpdateAnimation() {
+    showUpdateProgress();
+    
+    const steps = [
+        { percent: 10, status: '🔍 فحص التحديثات...', info: 'جاري الاتصال بالسيرفر' },
+        { percent: 25, status: '📥 تحميل المحتوى الجديد...', info: '✨ ميزات جديدة قادمة' },
+        { percent: 45, status: '📚 تحديث الأسئلة...', info: '🎯 أسئلة جديدة' },
+        { percent: 65, status: '🎮 تحديث الألعاب...', info: '🚀 تحسينات' },
+        { percent: 80, status: '🎨 تحديث التصميم...', info: '💎 تصميم أجمل' },
+        { percent: 95, status: '🎁 تجهيز الهدايا...', info: '🎉 على وشك الانتهاء' },
+        { percent: 100, status: '✅ تم التحديث بنجاح!', info: '🎊 استمتع بالتطبيق الجديد' }
+    ];
+    
+    for (let i = 0; i < steps.length; i++) {
+        const step = steps[i];
+        setUpdateProgress(step.percent, step.status, step.info);
+        
+        // صوت خفيف
+        if (typeof playBeep === 'function') {
+            playBeep(600 + i * 100, 0.08, 0.1);
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 700));
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    // نطق رسالة النهاية
+    if (typeof speakAuto === 'function' && soundEnabled && speechEnabled) {
+        speakAuto('تم تحديث التطبيق بنجاح! استمتع بالميزات الجديدة', 'ar-SA');
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    hideUpdateProgress();
+}
     function updateDailyBox() {
         const last = localStorage.getItem(DAILY_KEY), today = getTodayKey();
         const box = document.getElementById('dailyBox'), text = document.getElementById('dailyText');
@@ -6720,8 +7387,17 @@ body, .app-container, .screen { background: #0F172A !important; }
         const sb = document.getElementById('dailySpeakBtn');
         if (q.speak) { currentSpeakWord = q.speak; sb.classList.remove('hidden'); setTimeout(() => { if (currentSpeakWord === q.speak) speakWord(q.speak, sb); }, 350); } else sb.classList.add('hidden');
         document.getElementById('dailyAnswersList').innerHTML = q.answers.map((a, i) => `<button class="answer-btn" onclick="checkDailyAnswer(${i})"><span class="answer-letter">${String.fromCharCode(65+i)}</span>${a}</button>`).join('');
-        document.getElementById('dailyNextBtn').disabled = true; document.getElementById('dailyNextBtn').textContent = 'تأكيد الإجابة';
+                document.getElementById('dailyNextBtn').disabled = true; document.getElementById('dailyNextBtn').textContent = 'تأكيد الإجابة';
         dailyState.answered = false; dailyState.correct = false;
+        
+        // ✅ النطق التلقائي لسؤال التحدي اليومي
+        setTimeout(() => {
+            if (q.speak) {
+                speakWord(q.speak, document.getElementById('dailySpeakBtn'));
+            } else {
+                speakQuestion(q.question, q.subject);
+            }
+        }, 500);
     }
     function checkDailyAnswer(sel) {
         if (dailyState.answered) return; dailyState.answered = true;
@@ -6907,7 +7583,12 @@ body, .app-container, .screen { background: #0F172A !important; }
         document.getElementById('examNextBtn').disabled = true;
         document.getElementById('examNextBtn').textContent = examState.currentIndex === examState.questions.length - 1 ? 'تسليم الامتحان 🎉' : 'السؤال التالي ←';
         examState.answered = false;
+                // ✅ النطق التلقائي لسؤال الامتحان
+        setTimeout(() => {
+            speakQuestion(q.question, q.subject);
+        }, 500);
     }
+
     function checkExamAnswer(sel) {
         if (examState.answered) return; examState.answered = true;
         const q = examState.questions[examState.currentIndex];
@@ -7236,11 +7917,35 @@ body, .app-container, .screen { background: #0F172A !important; }
         }
 
         updateLeaderboardScore();
-        syncToFirebase();
-        registerPlayer(name);
+syncToFirebase();
 
-        playCelebrationSound();
-        speakArabic('أهلاً وسهلاً يا ' + name);
+// ✅ حفظ اللاعب مع تأكيد
+try {
+    await registerPlayer(name);
+    console.log('✅ registerPlayer نجحت');
+} catch(e) {
+    console.error('❌ registerPlayer فشلت:', e);
+}
+
+// ✅ تأكيد الحفظ بعد لحظة
+setTimeout(async () => {
+    try {
+        const check = await db.collection("players").doc(name).get();
+        if (!check.exists) {
+            console.warn('⚠️ اللاعب غير محفوظ — إعادة المحاولة');
+            await registerPlayer(name);
+        } else {
+            console.log('✅ تأكيد: اللاعب محفوظ');
+        }
+    } catch(e) {
+        console.warn('خطأ في التأكيد:', e);
+    }
+}, 2000);
+
+playCelebrationSound();
+setTimeout(() => {
+    speakWelcome(name);
+}, 800);
 
         const adminBtn = document.getElementById('adminBtn');
         if (adminBtn) adminBtn.classList.add('hidden');
@@ -7253,7 +7958,13 @@ body, .app-container, .screen { background: #0F172A !important; }
     const ALLOWED_FOUNDERS = [
         "sfntysfynty@gmail.com"
     ];
-
+        // ✅ دالة التحقق من صلاحية المؤسس
+    function requireFounder() {
+        if (typeof firebase === 'undefined' || !firebase.auth) return false;
+        const user = firebase.auth().currentUser;
+        return user && ALLOWED_FOUNDERS.includes(user.email);
+    
+}
     function showFounderLogin() {
         // مسح الحقول
         const emailInput = document.getElementById('founderEmailInput');
@@ -7507,38 +8218,39 @@ body, .app-container, .screen { background: #0F172A !important; }
     }
         // ============ Firebase: رفع البيانات ============
                 function syncToFirebase() {
-        if (typeof db === 'undefined' || !db) return;
-        let myName = '';
-        try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
-        if (!myName || myName.trim() === "") return;
-        if (myName === "عمر عثمان حميدو") return;
-        
-        const stars = parseInt(localStorage.getItem(STARS_KEY) || '0');
-        const cityName = (CITIES[currentCity] ? CITIES[currentCity].name : 'اعزاز 🏘️');
-        
-        db.collection("leaderboard").doc(myName).set({
-            name: myName,
-            stars: stars,
-            city: cityName,
-            time: Date.now()
-        }, { merge: true })
-        .catch(err => console.warn('Firebase sync error:', err.message));
-        
-        // ✅ تحديث آخر ظهور ومعلومات اللاعب
-        const deviceInfo = getDeviceInfo();
-        db.collection("players").doc(myName).set({
-            lastSeen: Date.now(),
-            stars: stars,
-            city: cityName,
-            device: deviceInfo.device,
-            deviceModel: deviceInfo.deviceModel,
-            brand: deviceInfo.brand,
-            deviceType: deviceInfo.deviceType,
-            os: deviceInfo.os,
-            browser: deviceInfo.browser
-        }, { merge: true })
-        .catch(err => console.warn('خطأ تحديث اللاعب:', err.message));
-    }
+    if (typeof db === 'undefined' || !db) return;
+    let myName = '';
+    try { myName = localStorage.getItem(USER_NAME_KEY) || ''; } catch(e) {}
+    if (!myName || myName.trim() === "") return;
+    if (myName === "عمر عثمان حميدو") return;
+    
+    const stars = parseInt(localStorage.getItem(STARS_KEY) || '0');
+    const cityName = (CITIES[currentCity] ? CITIES[currentCity].name : 'اعزاز 🏘️');
+    
+    // ✅ نستخدم merge: true حتى لا نمسح بصمة الهدية (lastGiftAt)
+    db.collection("leaderboard").doc(myName).set({
+        name: myName,
+        stars: stars,
+        city: cityName,
+        time: Date.now()
+    }, { merge: true })
+    .catch(err => console.warn('Firebase sync error:', err.message));
+    
+    // ✅ تحديث بيانات اللاعب
+    const deviceInfo = getDeviceInfo();
+    db.collection("players").doc(myName).set({
+        lastSeen: Date.now(),
+        stars: stars,
+        city: cityName,
+        device: deviceInfo.device,
+        deviceModel: deviceInfo.deviceModel,
+        brand: deviceInfo.brand,
+        deviceType: deviceInfo.deviceType,
+        os: deviceInfo.os,
+        browser: deviceInfo.browser
+    }, { merge: true })
+    .catch(err => console.warn('خطأ تحديث اللاعب:', err.message));
+}
 
     // ============ Firebase: لوحة الشرف الأونلاين ============
         // ============ نظام المستويات ============
@@ -7789,156 +8501,194 @@ body, .app-container, .screen { background: #0F172A !important; }
     }
 
           // ============ تحميل وعرض اللاعبين في لوحة المؤسس ============
-    async function loadPlayersList() {
-        const container = document.getElementById('adminPlayersList');
-        if (!container) return;
+    // ============ تحميل وعرض اللاعبين في لوحة المؤسس (مُحسَّن) ============
+async function loadPlayersList() {
+    const container = document.getElementById('adminPlayersList');
+    if (!container) return;
+    
+    container.innerHTML = '<div class="admin-empty">⏳ جاري تحميل اللاعبين...</div>';
+    
+    if (typeof db === 'undefined' || !db) {
+        container.innerHTML = '<div class="admin-empty">⚠️ Firebase غير متصل</div>';
+        return;
+    }
+    
+    try {
+        // ✅ 1. جلب جميع اللاعبين (بدون orderBy لتجنب استبعاد من ليس لديه registeredAt)
+        const playersSnap = await db.collection("players").get();
         
-        container.innerHTML = '<div class="admin-empty">⏳ جاري تحميل اللاعبين...</div>';
+        // ✅ 2. جلب leaderboard (مصدر النجوم الرسمي)
+        const leaderboardSnap = await db.collection("leaderboard").get();
+        const leaderboardData = {};
+        leaderboardSnap.forEach(doc => {
+            leaderboardData[doc.id] = doc.data();
+        });
         
-        if (typeof db === 'undefined' || !db) {
-            container.innerHTML = '<div class="admin-empty">⚠️ Firebase غير متصل</div>';
+        // ✅ 3. تجميع كل اللاعبين من المصدرين (players + leaderboard)
+        const allPlayersMap = new Map();
+        
+        // من players أولاً
+        playersSnap.forEach(doc => {
+            const data = doc.data();
+            const name = data.name || doc.id;
+            if (name === "عمر عثمان حميدو") return; // استثناء المؤسس
+            allPlayersMap.set(doc.id, { id: doc.id, ...data });
+        });
+        
+        // ✅ دمج/إضافة من leaderboard (لأي لاعب موجود في leaderboard وغير موجود في players)
+        leaderboardSnap.forEach(doc => {
+            const name = doc.data().name || doc.id;
+            if (name === "عمر عثمان حميدو") return;
+            
+            if (allPlayersMap.has(doc.id)) {
+                // موجود بالفعل — دمج النجوم من leaderboard
+                const existing = allPlayersMap.get(doc.id);
+                existing.stars = doc.data().stars || existing.stars || 0;
+                existing.city = doc.data().city || existing.city || 'اعزاز';
+                if (!existing.registeredAt) {
+                    existing.registeredAt = doc.data().time || Date.now();
+                }
+            } else {
+                // ✅ جديد من leaderboard فقط (لاعب قديم لم يُسجّل في players)
+                allPlayersMap.set(doc.id, {
+                    id: doc.id,
+                    name: name,
+                    stars: doc.data().stars || 0,
+                    city: doc.data().city || 'اعزاز',
+                    registeredAt: doc.data().time || Date.now(),
+                    lastSeen: doc.data().time || Date.now(),
+                    device: 'غير معروف (من leaderboard)',
+                    deviceModel: 'غير معروف',
+                    brand: 'غير معروف',
+                    deviceType: '📱 هاتف',
+                    os: 'غير معروف',
+                    browser: 'غير معروف'
+                });
+            }
+        });
+        
+        // ✅ 4. تحويل إلى مصفوفة
+        const allPlayers = Array.from(allPlayersMap.values());
+        
+        if (allPlayers.length === 0) {
+            container.innerHTML = '<div class="admin-empty">📭 لا يوجد لاعبون مسجلون بعد</div>';
             return;
         }
         
-        try {
-            // ✅ جلب من leaderboard (لأنه يحتوي على النجوم المحدّثة)
-            const leaderboardSnap = await db.collection("leaderboard").get();
-            const playersData = {};
-            leaderboardSnap.forEach(doc => {
-                playersData[doc.id] = doc.data();
+        // ✅ 5. إصلاح تلقائي: إضافة registeredAt لأي لاعب لا يحتويه (في Firebase)
+        const playersNeedingFix = allPlayers.filter(p => !p.registeredAt);
+        if (playersNeedingFix.length > 0) {
+            console.log('🔧 جاري إصلاح ' + playersNeedingFix.length + ' لاعب بدون registeredAt...');
+            playersNeedingFix.forEach(async (p) => {
+                try {
+                    await db.collection("players").doc(p.id).set({
+                        registeredAt: p.lastSeen || Date.now()
+                    }, { merge: true });
+                } catch(e) {}
             });
+        }
+        
+        // ✅ 6. الترتيب في JavaScript (وليس Firestore)
+        allPlayers.sort((a, b) => (b.stars || 0) - (a.stars || 0));
+        
+        // ✅ 7. بناء HTML
+        let html = `
+            <div style="text-align:center;margin-bottom:15px;">
+                <div style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border-radius:20px;font-weight:900;font-size:1.1rem;box-shadow:0 6px 20px rgba(220,38,38,0.5);">
+                    👥 إجمالي اللاعبين: ${allPlayers.length}
+                </div>
+            </div>
+        `;
+        
+        allPlayers.forEach((data, index) => {
+            const name = data.name || 'غير معروف';
+            const device = data.device || 'غير معروف';
+            const deviceModel = data.deviceModel || 'غير معروف';
+            const brand = data.brand || 'غير معروف';
+            const deviceType = data.deviceType || 'غير معروف';
+            const os = data.os || 'غير معروف';
+            const browser = data.browser || 'غير معروف';
+            const screenSize = data.screenSize || '؟';
+            const stars = data.stars || 0;
+            const city = data.city || 'اعزاز';
             
-            // ✅ جلب من players (للمعلومات الكاملة)
-            const snap = await db.collection("players").orderBy("registeredAt", "desc").get();
-            
-            if (snap.empty) {
-                container.innerHTML = '<div class="admin-empty">📭 لا يوجد لاعبون مسجلون بعد</div>';
-                return;
+            // تنسيق التاريخ
+            let dateStr = 'غير معروف';
+            if (data.registeredAt) {
+                const d = new Date(data.registeredAt);
+                dateStr = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} - ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
             }
             
-            // ✅ دمج البيانات
-            const allPlayers = [];
-            snap.forEach(doc => {
-                const pData = doc.data();
-                const lbData = playersData[doc.id] || {};
-                allPlayers.push({
-                    ...pData,
-                    stars: lbData.stars !== undefined ? lbData.stars : (pData.stars || 0),
-                    city: lbData.city || pData.city || 'اعزاز'
-                });
-            });
+            // تنسيق آخر ظهور
+            let lastSeenStr = 'غير معروف';
+            if (data.lastSeen) {
+                const d = new Date(data.lastSeen);
+                lastSeenStr = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} - ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+            }
             
-            // ✅ ترتيب حسب النجوم من الأعلى للأقل
-            allPlayers.sort((a, b) => (b.stars || 0) - (a.stars || 0));
+            // المستوى
+            const level = getLevelFromStars(stars, name);
             
-            let html = `
-                <div style="text-align:center;margin-bottom:15px;">
-                    <div style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border-radius:20px;font-weight:900;font-size:1.1rem;box-shadow:0 6px 20px rgba(220,38,38,0.5);">
-                        👥 إجمالي اللاعبين: ${allPlayers.length}
+            html += `
+            <div class="admin-item-card" style="border-right:4px solid #dc2626;background:#fff5f5;position:relative;">
+                <div style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.85rem;">#${index + 1}</div>
+                
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-left:40px;">
+                    <span style="font-size:1.8rem;">${deviceType.includes('هاتف') ? '📱' : '💻'}</span>
+                    <div style="flex:1;">
+                        <div class="admin-item-title" style="color:#dc2626;font-size:1.1rem;">${escapeHTML(name)}</div>
+                        <div style="font-size:0.8rem;color:#92400e;font-weight:700;">⭐ ${stars} نجمة | 🎖️ مستوى ${level} | 📍 ${city}</div>
                     </div>
                 </div>
-            `;
-            
-            allPlayers.forEach((data, index) => {
-                const name = data.name || 'غير معروف';
-                const device = data.device || 'غير معروف';
-                const deviceModel = data.deviceModel || 'غير معروف';
-                const brand = data.brand || 'غير معروف';
-                const deviceType = data.deviceType || 'غير معروف';
-                const os = data.os || 'غير معروف';
-                const browser = data.browser || 'غير معروف';
-                const screenSize = data.screenSize || '؟';
-                const stars = data.stars || 0;
-                const city = data.city || 'اعزاز';
                 
-                // تنسيق التاريخ
-                let dateStr = 'غير معروف';
-                if (data.registeredAt) {
-                    const d = new Date(data.registeredAt);
-                    dateStr = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} - ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
-                }
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0;">
+                    <button onclick="addStarsToPlayer('${name.replace(/'/g, "\\'")}')" 
+                        style="padding:10px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(16,185,129,0.4);">
+                        ➕ إضافة نجوم
+                    </button>
+                    <button onclick="removeStarsFromPlayer('${name.replace(/'/g, "\\'")}')" 
+                        style="padding:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(245,158,11,0.4);">
+                        ➖ إزالة نجوم
+                    </button>
+                    <button onclick="setStarsForPlayer('${name.replace(/'/g, "\\'")}', ${stars})" 
+                        style="padding:10px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(59,130,246,0.4);">
+                        ✏️ تعديل النجوم
+                    </button>
+                    <button onclick="deletePlayer('${name.replace(/'/g, "\\'")}')" 
+                        style="padding:10px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(220,38,38,0.4);">
+                        🗑️ حذف اللاعب
+                    </button>
+                </div>
                 
-                // تنسيق آخر ظهور
-                let lastSeenStr = 'غير معروف';
-                if (data.lastSeen) {
-                    const d = new Date(data.lastSeen);
-                    lastSeenStr = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} - ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
-                }
-                
-                // المستوى
-                const level = getLevelFromStars(stars, name);
-                
-                // الحفاظ على الاسم في ID آمن
-                const safeName = name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '_');
-                
-                html += `
-                <div class="admin-item-card" style="border-right:4px solid #dc2626;background:#fff5f5;position:relative;">
-                    <!-- ترتيب -->
-                    <div style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.85rem;">#${index + 1}</div>
-                    
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-left:40px;">
-                        <span style="font-size:1.8rem;">${deviceType.includes('هاتف') ? '📱' : '💻'}</span>
-                        <div style="flex:1;">
-                            <div class="admin-item-title" style="color:#dc2626;font-size:1.1rem;">${name}</div>
-                            <div style="font-size:0.8rem;color:#92400e;font-weight:700;">⭐ ${stars} نجمة | 🎖️ مستوى ${level} | 📍 ${city}</div>
-                        </div>
+                <div style="background:white;padding:10px;border-radius:10px;font-size:0.8rem;line-height:1.9;">
+                    <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);padding:6px 10px;border-radius:8px;margin-bottom:8px;font-weight:800;color:#92400e;">
+                        <b>${escapeHTML(device)}</b>
                     </div>
-                    
-                    <!-- ========== أزرار التحكم ========== -->
-                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0;">
-                        <button onclick="addStarsToPlayer('${name.replace(/'/g, "\\'")}')" 
-                            style="padding:10px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(16,185,129,0.4);">
-                            ➕ إضافة نجوم
-                        </button>
-                        <button onclick="removeStarsFromPlayer('${name.replace(/'/g, "\\'")}')" 
-                            style="padding:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(245,158,11,0.4);">
-                            ➖ إزالة نجوم
-                        </button>
-                        <button onclick="setStarsForPlayer('${name.replace(/'/g, "\\'")}', ${stars})" 
-                            style="padding:10px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(59,130,246,0.4);">
-                            ✏️ تعديل النجوم
-                        </button>
-                        <button onclick="deletePlayer('${name.replace(/'/g, "\\'")}')" 
-                            style="padding:10px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:0.85rem;box-shadow:0 3px 10px rgba(220,38,38,0.4);">
-                            🗑️ حذف اللاعب
-                        </button>
-                    </div>
-                    
-                    <div style="background:white;padding:10px;border-radius:10px;font-size:0.8rem;line-height:1.9;">
-                        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);padding:6px 10px;border-radius:8px;margin-bottom:8px;font-weight:800;color:#92400e;">
-                            <b>${device}</b>
-                        </div>
-                        <div>🏷️ <b>الماركة:</b> ${brand}</div>
-                        <div>📱 <b>الموديل:</b> ${deviceModel}</div>
-                        <div>💿 <b>النظام:</b> ${os}</div>
-                        <div>🌐 <b>المتصفح:</b> ${browser}</div>
-                        <div>📐 <b>حجم الشاشة:</b> ${screenSize}</div>
-                        <div>🕐 <b>أول تسجيل:</b> ${dateStr}</div>
-                        <div>👋 <b>آخر ظهور:</b> ${lastSeenStr}</div>
-                    </div>
-                </div>`;
-            });
-            
-            container.innerHTML = html;
-        } catch (err) {
-            console.error('خطأ في تحميل اللاعبين:', err);
-            container.innerHTML = '<div class="admin-empty">⚠️ تعذّر تحميل اللاعبين. تحقق من الإنترنت.</div>';
-        }
-    }
-
-    // ============ إضافة نجوم للاعب ============
-    async function addStarsToPlayer(playerName) {
-        const amount = prompt(`كم نجمة تريد إضافتها للاعب "${playerName}"؟\n\nمثال: 50`, '10');
-        if (amount === null) return;
+                    <div>🏷️ <b>الماركة:</b> ${escapeHTML(brand)}</div>
+                    <div>📱 <b>الموديل:</b> ${escapeHTML(deviceModel)}</div>
+                    <div>💿 <b>النظام:</b> ${escapeHTML(os)}</div>
+                    <div>🌐 <b>المتصفح:</b> ${escapeHTML(browser)}</div>
+                    <div>📐 <b>حجم الشاشة:</b> ${escapeHTML(screenSize)}</div>
+                    <div>🕐 <b>أول تسجيل:</b> ${dateStr}</div>
+                    <div>👋 <b>آخر ظهور:</b> ${lastSeenStr}</div>
+                </div>
+            </div>`;
+        });
         
-        const num = parseInt(amount);
-        if (isNaN(num) || num <= 0) {
-            showAlert('⚠️ خطأ', 'الرجاء إدخال رقم صحيح أكبر من صفر', '⚠️');
-            return;
-        }
+        container.innerHTML = html;
         
-        await updatePlayerStars(playerName, num, 'add');
+    } catch (err) {
+        console.error('خطأ في تحميل اللاعبين:', err);
+        container.innerHTML = `
+            <div class="admin-empty" style="color:#dc2626;">
+                ⚠️ تعذّر تحميل اللاعبين<br>
+                <small style="font-size:0.75rem;">${err.message}</small><br><br>
+                <button onclick="loadPlayersList()" style="background:#dc2626;color:white;border:none;padding:10px 25px;border-radius:50px;font-weight:700;cursor:pointer;">
+                    🔄 إعادة المحاولة
+                </button>
+            </div>`;
     }
+}
 
     // ============ إزالة نجوم من لاعب ============
     async function removeStarsFromPlayer(playerName) {
@@ -8060,6 +8810,12 @@ body, .app-container, .screen { background: #0F172A !important; }
 
 // ============ حذف لاعب (شامل) ============
 async function deletePlayer(playerName) {
+    // ✅ فحص صلاحية المؤسس
+    if (!requireFounder()) {
+        showAlert('❌ ممنوع', 'هذه العملية للمؤسس فقط', '🔒');
+        return;
+    }
+    
     showConfirm({
         icon: '🗑️',
         title: '⚠️ حذف اللاعب نهائياً',
@@ -8946,154 +9702,125 @@ async function permanentlyDeletePlayer(playerName) {
 
     // إرسال هدية جماعية
     async function sendGroupGift() {
-        if (typeof db === 'undefined' || !db) {
-            showAlert('⚠️ خطأ', 'Firebase غير متصل', '❌');
-            return;
-        }
-        
-        const amount = parseInt(document.getElementById('giftStarsAmount').value);
-        const target = document.getElementById('giftTarget').value;
-        const reason = document.getElementById('giftReason').value.trim();
-        
-        // فحص المدخلات
-        if (isNaN(amount) || amount <= 0) {
-            showAlert('⚠️ خطأ', 'أدخل عدد نجوم صحيح', '⭐');
-            return;
-        }
-        
-        if (amount > 10000) {
-            showAlert('⚠️ عدد كبير', 'الحد الأقصى 10000 نجمة', '⚠️');
-            return;
-        }
-        
-        // جلب قائمة اللاعبين المستهدفين
-        let playersSnap;
-        try {
-            playersSnap = await db.collection("leaderboard").get();
-        } catch (err) {
-            showAlert('⚠️ خطأ', 'تعذّر جلب اللاعبين', '❌');
-            return;
-        }
-        
-        if (playersSnap.empty) {
-            showAlert('📭 لا يوجد لاعبون', 'لا يوجد لاعبون لإرسال الهدية لهم', '📭');
-            return;
-        }
-        
-        // تجميع اللاعبين
-        let players = [];
-        playersSnap.forEach(doc => {
-            const data = doc.data();
-            if (data.name === "عمر عثمان حميدو") return; // استثناء المؤسس
-            players.push({ id: doc.id, ...data });
-        });
-        
-        // فلترة حسب الهدف
-        const now = Date.now();
-        const oneWeekAgo = now - (7 * 24 * 60 * 60 * 1000);
-        
-        if (target === 'active') {
-            // جلب معلومات آخر ظهور
-            const playersSnap2 = await db.collection("players").get();
-            const lastSeenMap = {};
-            playersSnap2.forEach(doc => {
-                lastSeenMap[doc.id] = doc.data().lastSeen || 0;
-            });
-            players = players.filter(p => lastSeenMap[p.id] && lastSeenMap[p.id] > oneWeekAgo);
-        } else if (target === 'top') {
-            players.sort((a, b) => (b.stars || 0) - (a.stars || 0));
-            players = players.slice(0, 10);
-        } else if (target === 'bottom') {
-            players.sort((a, b) => (a.stars || 0) - (b.stars || 0));
-            players = players.slice(0, 10);
-        }
-        
-        if (players.length === 0) {
-            showAlert('📭 لا يوجد لاعبون', 'لا يوجد لاعبون مطابقون للفلتر', '📭');
-            return;
-        }
-        
-        // تأكيد
-        const targetLabel = { all: 'كل اللاعبين', active: 'النشطين', top: 'أفضل 10', bottom: 'أقل 10' }[target];
-        const totalGift = amount * players.length;
-        
-        if (!confirm(`هل تريد إرسال ${amount} ⭐ إلى ${players.length} لاعب (${targetLabel})؟\n\nالمجموع: ${totalGift} ⭐\nالسبب: ${reason || 'بدون سبب'}`)) return;
-        
-        // إرسال الهدية
-        try {
-            showAlert('⏳ جاري الإرسال', `يتم إرسال الهدية لـ ${players.length} لاعب...`, '⏳');
-            
-            let success = 0;
-            const batch = db.batch();
-            
-            players.forEach(p => {
-                const lbRef = db.collection("leaderboard").doc(p.id);
-                const newStars = (p.stars || 0) + amount;
-                batch.set(lbRef, {
-                    name: p.name || p.id,
-                    stars: newStars,
-                    lastGiftAt: now,
-                    lastGiftAmount: amount
-                }, { merge: true });
-                success++;
-            });
-            
-            await batch.commit();
-            
-            // تحديث players
-            const batch2 = db.batch();
-            players.forEach(p => {
-                const pRef = db.collection("players").doc(p.id);
-                batch2.set(pRef, {
-                    lastGiftAt: now,
-                    lastGiftAmount: amount
-                }, { merge: true });
-            });
-            await batch2.commit();
-            
-            // إرسال إشعار للجميع
-            if (reason) {
-                await db.collection("notifications").add({
-                    type: 'success',
-                    title: `🎁 هدية من المؤسس!`,
-                    text: `تم إضافة ${amount} ⭐ لكل اللاعبين!\n\n${reason}`,
-                    time: now,
-                    expiresAt: now + (7 * 24 * 60 * 60 * 1000),
-                    duration: 7,
-                    readBy: [],
-                    sentBy: 'founder_gift'
-                });
-            }
-            
-            // حفظ في السجل
-            await db.collection("giftHistory").add({
-                amount: amount,
-                target: target,
-                targetCount: players.length,
-                totalGift: totalGift,
-                reason: reason || 'بدون سبب',
-                time: now,
-                sentBy: 'founder'
-            });
-            
-            playCelebrationSound();
-            showAlert('✅ تم الإرسال!', 
-                `تم إرسال <b>${amount} ⭐</b><br>` +
-                `إلى <b>${players.length}</b> لاعب<br>` +
-                `المجموع: <b>${totalGift} ⭐</b>`, 
-                '🎁');
-            
-            // مسح الحقول
-            document.getElementById('giftReason').value = '';
-            
-            // إعادة تحميل
-            setTimeout(() => loadGiftsTab(), 1500);
-            
-        } catch (err) {
-            console.error('خطأ في الإرسال:', err);
-            showAlert('⚠️ خطأ', 'تعذّر الإرسال: ' + err.message, '❌');
-        }
+    if (!requireFounder()) {
+        showAlert('❌ ممنوع', 'هذه العملية للمؤسس فقط', '🔒');
+        return;
     }
+    
+    if (typeof db === 'undefined' || !db) {
+        showAlert('⚠️ خطأ', 'Firebase غير متصل', '❌');
+        return;
+    }
+    
+    const amount = parseInt(document.getElementById('giftStarsAmount').value);
+    const target = document.getElementById('giftTarget').value;
+    const reason = document.getElementById('giftReason').value.trim();
+    
+    if (isNaN(amount) || amount <= 0) {
+        showAlert('⚠️ خطأ', 'أدخل عدد نجوم صحيح', '⭐');
+        return;
+    }
+    
+    // نستخدم batch لتحديث كل اللاعبين مرة واحدة
+    try {
+        showAlert('⏳ جاري الإرسال', 'يتم تجهيز الهدية لجميع اللاعبين...', '⏳');
+        
+        const now = Date.now();
+        let targetPlayers = [];
+        let targetIds = [];
+
+        // 1. جلب اللاعبين من leaderboard
+        const lbSnap = await db.collection("leaderboard").get();
+        lbSnap.forEach(doc => {
+            const data = doc.data();
+            if (data.name !== "عمر عثمان حميدو") {
+                targetPlayers.push({ id: doc.id, ...data });
+                targetIds.push(doc.id);
+            }
+        });
+
+        // 2. جلب اللاعبين من players (حتى لو لم يكونوا في leaderboard)
+        const pSnap = await db.collection("players").get();
+        pSnap.forEach(doc => {
+            const data = doc.data();
+            if (data.name !== "عمر عثمان حميدو" && !targetIds.includes(doc.id)) {
+                targetPlayers.push({ id: doc.id, ...data });
+                targetIds.push(doc.id);
+            }
+        });
+
+        if (targetPlayers.length === 0) {
+            showAlert('📭 لا يوجد لاعبون', 'لا يوجد لاعبون مسجلون حالياً', '📭');
+            return;
+        }
+
+        // ✅ إرسال الهدية للجميع دفعة واحدة (حتى لو كان اللاعب جديداً أو ليس لديه نجوم)
+        const batch = db.batch();
+        
+        targetPlayers.forEach(p => {
+            const lbRef = db.collection("leaderboard").doc(p.id);
+            const pRef = db.collection("players").doc(p.id);
+            
+            // تحديث leaderboard (هنا تُحفظ النجوم)
+            batch.set(lbRef, {
+                name: p.name || p.id,
+                stars: (p.stars || 0) + amount,
+                lastGiftAt: now,
+                lastGiftAmount: amount,
+                time: now
+            }, { merge: true });
+            
+            // تحديث players (لتسجيل بصمة الهدية)
+            batch.set(pRef, {
+                lastGiftAt: now,
+                lastGiftAmount: amount,
+                stars: (p.stars || 0) + amount
+            }, { merge: true });
+        });
+
+        await batch.commit();
+        console.log(`✅ تم إرسال الهدية لـ ${targetPlayers.length} لاعب`);
+
+        // إرسال إشعار للجميع
+        if (reason) {
+            await db.collection("notifications").add({
+                type: 'success',
+                title: `🎁 هدية من المؤسس!`,
+                text: `تم إضافة ${amount} ⭐ لكل اللاعبين!\n\n${reason}`,
+                time: now,
+                expiresAt: now + (7 * 24 * 60 * 60 * 1000),
+                duration: 7,
+                readBy: [],
+                sentBy: 'founder_gift'
+            });
+        }
+
+        // حفظ في السجل
+        await db.collection("giftHistory").add({
+            amount: amount,
+            target: 'all',
+            targetCount: targetPlayers.length,
+            totalGift: amount * targetPlayers.length,
+            reason: reason || 'بدون سبب',
+            time: now,
+            sentBy: 'founder'
+        });
+
+        playCelebrationSound();
+        showAlert('✅ تم الإرسال للجميع!', 
+            `تم إرسال <b>${amount} ⭐</b><br>` +
+            `إلى <b>${targetPlayers.length}</b> لاعب<br><br>` +
+            `🌟 اللاعبون الجدد سيستلمونها أيضاً!`, 
+            '🎁');
+        
+        document.getElementById('giftReason').value = '';
+        setTimeout(() => loadGiftsTab(), 1500);
+
+    } catch (err) {
+        console.error('خطأ في الإرسال:', err);
+        showAlert('⚠️ خطأ', 'تعذّر الإرسال: ' + err.message, '❌');
+    }
+}
 
     // تحميل تاريخ الهدايا
     async function loadGiftsHistory() {
@@ -9555,7 +10282,13 @@ async function permanentlyDeletePlayer(playerName) {
     }
 
     function adminAddQuestion() {
-        const subject = document.getElementById('adminQSubject').value;
+    // ✅ فحص صلاحية المؤسس
+    if (!requireFounder()) {
+        showAlert('❌ ممنوع', 'هذه العملية للمؤسس فقط', '🔒');
+        return;
+    }
+    
+    const subject = document.getElementById('adminQSubject').value;
         const question = document.getElementById('adminQText').value.trim();
         const correct = document.getElementById('adminQCorrect').value.trim();
         const wrong1 = document.getElementById('adminQWrong1').value.trim();
